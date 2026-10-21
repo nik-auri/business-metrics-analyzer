@@ -3,14 +3,25 @@
 import pandas as pd
 
 
+def calculate_profitability(revenue: float, cost: float) -> float:
+    """Возвращает долю прибыли в выручке в процентах."""
+    if revenue == 0:
+        return 0.0
+    return (revenue - cost) / revenue * 100
+
+
 def main():
     data = {
         "Месяц": ["Январь", "Февраль", "Март"],
         "Выручка": [120000, 150000, 135000],
+        "Затраты": [90000, 110000, 100000],
     }
     df = pd.DataFrame(data)
     print(df)
     print("Средняя выручка:", df["Выручка"].mean())
+    revenue = float(df["Выручка"].sum())
+    cost = float(df["Затраты"].sum())
+    print(f"Рентабельность за квартал: {calculate_profitability(revenue, cost):.2f}%")
 
 
 if __name__ == "__main__":
